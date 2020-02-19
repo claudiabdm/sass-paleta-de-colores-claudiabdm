@@ -1,0 +1,119 @@
+@import "reset";
+
+//------------------------------------------
+// COLORS
+//------------------------------------------
+
+$color-default: #d9f5e8;
+$color-primary: #37cbc2;
+$color-warning: #fb3;
+$color-danger:  #ff6347;
+
+$palette: ('default': ('color': $color-default,
+    'name': 'Mint',
+  ),
+  'primary': ('color': $color-primary,
+    'name': 'Teal',
+  ),
+  'warning': ('color': $color-warning,
+    'name': 'Gold',
+  ),
+  'danger': ('color': $color-danger,
+    'name': 'Tomato',
+  ),
+);
+
+
+//------------------------------------------
+// GLOBAL
+//------------------------------------------
+
+// RGB and HSL function
+//------------------------------------------
+@function toRGB ($hexColor) {
+  @return'#{red($hexColor)} / #{blue($hexColor)} / #{green($hexColor)}';
+}
+
+@function toHSL ($hexColor) {
+  @return'#{round(hue($hexColor))} / #{round(saturation($hexColor))} / #{round(lightness($hexColor))}';
+}
+
+
+// Body
+//------------------------------------------
+body {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+}
+
+
+//------------------------------------------
+// CARD
+//------------------------------------------
+.card {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  border: 1px solid #eee;
+  border-radius: 4px;
+  margin: 10px;
+  padding: 12px;
+  font-family: sans-serif;
+  font-size: 0.75rem;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.075);
+
+  &__color {
+    margin-bottom: 20px;
+    border-radius: 3px;
+    height: 5rem;
+  }
+
+  &__details {
+    display: grid;
+    grid-template-columns: 1fr max-content;
+    grid-template-rows: repeat(3, 1fr);
+    row-gap: 10px;
+    margin: 0;
+  }
+
+  &__term {
+    color: #666;
+    font-weight: bold;
+  }
+
+  &__desc {
+    text-align: right;
+    color: #999;
+  }
+
+}
+
+@each $state,
+$value in $palette {
+
+  .card--#{$state} {
+
+    // Card color 
+    & .card__color {
+      background-color: map-get($value, 'color');
+    }
+
+    //Name
+    & .card__desc--name::after {
+      content: map-get($value, 'name');
+    }
+
+    //RGB
+    & .card__desc--rgb::after {
+      content: toRGB(map-get($value, 'color'));
+    }
+
+     //HSL
+     & .card__desc--hsl::after {
+      content: toHSL(map-get($value, 'color'));
+    }
+
+  }
+}
