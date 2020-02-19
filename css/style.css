@@ -43,18 +43,15 @@ table {
   border-spacing: 0; }
 
 body {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  align-items: center; }
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  column-gap: 20px;
+  row-gap: 10px;
+  padding: 20px; }
 
 .card {
-  display: flex;
-  flex-direction: column;
-  flex-grow: 1;
   border: 1px solid #eee;
   border-radius: 4px;
-  margin: 10px;
   padding: 12px;
   font-family: sans-serif;
   font-size: 0.75rem;
@@ -67,15 +64,13 @@ body {
     display: grid;
     grid-template-columns: 1fr max-content;
     grid-template-rows: repeat(3, 1fr);
-    row-gap: 10px;
-    margin: 0; }
+    row-gap: 10px; }
   .card__term {
     color: #666;
     font-weight: bold; }
   .card__desc {
-    text-align: right;
-    color: #999;
-    font-weight: normal; }
+    justify-self: right;
+    color: #999; }
 
 .card--default .card__color {
   background-color: #d9f5e8; }
@@ -84,7 +79,7 @@ body {
   content: "Mint"; }
 
 .card--default .card__desc--rgb::after {
-  content: "217 / 232 / 245"; }
+  content: "217 / 245 / 232"; }
 
 .card--default .card__desc--hsl::after {
   content: "152deg / 58% / 91%"; }
@@ -96,7 +91,7 @@ body {
   content: "Teal"; }
 
 .card--primary .card__desc--rgb::after {
-  content: "55 / 194 / 203"; }
+  content: "55 / 203 / 194"; }
 
 .card--primary .card__desc--hsl::after {
   content: "176deg / 59% / 51%"; }
@@ -108,7 +103,7 @@ body {
   content: "Gold"; }
 
 .card--warning .card__desc--rgb::after {
-  content: "255 / 51 / 187"; }
+  content: "255 / 187 / 51"; }
 
 .card--warning .card__desc--hsl::after {
   content: "40deg / 100% / 60%"; }
@@ -120,7 +115,7 @@ body {
   content: "Tomato"; }
 
 .card--danger .card__desc--rgb::after {
-  content: "255 / 71 / 99"; }
+  content: "255 / 99 / 71"; }
 
 .card--danger .card__desc--hsl::after {
   content: "9deg / 100% / 64%"; }

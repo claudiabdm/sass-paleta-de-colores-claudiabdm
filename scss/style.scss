@@ -9,7 +9,8 @@ $color-primary: #37cbc2;
 $color-warning: #fb3;
 $color-danger:  #ff6347;
 
-$palette: ('default': ('color': $color-default,
+$palette: (
+  'default': ('color': $color-default,
     'name': 'Mint',
   ),
   'primary': ('color': $color-primary,
@@ -31,7 +32,7 @@ $palette: ('default': ('color': $color-default,
 // RGB and HSL function
 //------------------------------------------
 @function toRGB ($hexColor) {
-  @return'#{red($hexColor)} / #{blue($hexColor)} / #{green($hexColor)}';
+  @return'#{red($hexColor)} / #{green($hexColor)} / #{blue($hexColor)}';
 }
 
 @function toHSL ($hexColor) {
@@ -42,10 +43,11 @@ $palette: ('default': ('color': $color-default,
 // Body
 //------------------------------------------
 body {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  align-items: center;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  column-gap: 20px;
+  row-gap: 10px;
+  padding: 20px;
 }
 
 
@@ -53,12 +55,8 @@ body {
 // CARD
 //------------------------------------------
 .card {
-  display: flex;
-  flex-direction: column;
-  flex-grow: 1;
   border: 1px solid #eee;
   border-radius: 4px;
-  margin: 10px;
   padding: 12px;
   font-family: sans-serif;
   font-size: 0.75rem;
@@ -75,7 +73,6 @@ body {
     grid-template-columns: 1fr max-content;
     grid-template-rows: repeat(3, 1fr);
     row-gap: 10px;
-    margin: 0;
   }
 
   &__term {
@@ -84,14 +81,13 @@ body {
   }
 
   &__desc {
-    text-align: right;
+    justify-self: right;
     color: #999;
   }
 
 }
 
-@each $state,
-$value in $palette {
+@each $state,$value in $palette {
 
   .card--#{$state} {
 
@@ -117,3 +113,39 @@ $value in $palette {
 
   }
 }
+
+// With List
+
+// $palette-list: (
+// ('default', $color-default, 'Mint' ),
+// ('primary', $color-primary, 'Teal'),
+// ('warning', $color-warning, 'Gold'),
+//  ('danger', $color-danger, 'Tomato'),
+// );
+
+// @each $cardColor in $palette-list {
+
+//   .card--#{nth($cardColor, 1)} {
+
+//     // Card color 
+//     & .card__color {
+//       background-color: nth($cardColor, 2);
+//     }
+
+//     //Name
+//     & .card__desc--name::after {
+//       content: nth($cardColor, 3);
+//     }
+
+//     //RGB
+//     & .card__desc--rgb::after {
+//       content: toRGB(nth($cardColor, 2));
+//     }
+
+//      //HSL
+//      & .card__desc--hsl::after {
+//       content: toHSL(nth($cardColor, 2));
+//     }
+
+//   }
+// }
